@@ -231,7 +231,7 @@ public class DeviceProfile {
         hotseatBarSizePx = isVerticalBarLayout()
                 ? Utilities.pxFromDp(inv.iconSize, dm)
                 : res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_size)
-                        + hotseatBarTopPaddingPx + hotseatBarBottomPaddingPx;
+                        + hotseatBarTopPaddingPx;
 
         mBottomMarginHw = res.getDimensionPixelSize(R.dimen.qsb_hotseat_bottom_margin_hw);
         if (!isVerticalBarLayout()) {
@@ -261,8 +261,8 @@ public class DeviceProfile {
             // ie. For a display with a large aspect ratio, we can keep the icons on the workspace
             // in portrait mode closer together by adding more height to the hotseat.
             // Note: This calculation was created after noticing a pattern in the design spec.
-            int extraSpace = getCellSize().y - iconSizePx - iconDrawablePaddingPx;
-            hotseatBarSizePx += extraSpace - pageIndicatorSizePx;
+            // int extraSpace = getCellSize().y - iconSizePx - iconDrawablePaddingPx;
+            // hotseatBarSizePx += extraSpace - pageIndicatorSizePx;
 
             // Recalculate the available dimensions using the new hotseat size.
             updateAvailableDimensions(dm, res);
@@ -538,8 +538,7 @@ public class DeviceProfile {
                 availablePaddingX = (int) Math.min(availablePaddingX,
                             width * MAX_HORIZONTAL_PADDING_PERCENT);
                 int availablePaddingY = Math.max(0, height - topWorkspacePadding - paddingBottom
-                        - (2 * inv.numRows * cellHeightPx) - hotseatBarTopPaddingPx
-                        - hotseatBarBottomPaddingPx);
+                        - (2 * inv.numRows * cellHeightPx) - hotseatBarTopPaddingPx);
                 padding.set(availablePaddingX / 2, topWorkspacePadding + availablePaddingY / 2,
                         availablePaddingX / 2, paddingBottom + availablePaddingY / 2);
             } else {
@@ -681,7 +680,7 @@ public class DeviceProfile {
                             + cellLayoutPaddingLeftRightPx,
                     hotseatBarTopPaddingPx,
                     hotseatAdjustment + workspacePadding.right + cellLayoutPaddingLeftRightPx,
-                    hotseatBarBottomPaddingPx + mInsets.bottom + cellLayoutBottomPaddingPx);
+                    mInsets.bottom + cellLayoutBottomPaddingPx);
         } else {
             // For phones, layout the hotseat without any bottom margin
             // to ensure that we have space for the folders
@@ -692,7 +691,7 @@ public class DeviceProfile {
                             + cellLayoutPaddingLeftRightPx,
                     hotseatBarTopPaddingPx,
                     hotseatAdjustment + workspacePadding.right + cellLayoutPaddingLeftRightPx,
-                    hotseatBarBottomPaddingPx + mInsets.bottom + cellLayoutBottomPaddingPx);
+                    mInsets.bottom + cellLayoutBottomPaddingPx);
         }
         hotseat.setLayoutParams(lp);
 
